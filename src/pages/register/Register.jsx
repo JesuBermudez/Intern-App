@@ -4,15 +4,13 @@ const Register = () => {
   const params = {
     text: "Continuar",
     onClick: () => console.log("click en registrar"),
-    styles:
-      "bg-transparent p-2 hover:bg-primary hover:text-accent rounded-full border border-primary text-primary w-full",
   };
   return (
     <section className=" h-screen  flex flex-col justify-center items-center">
       <div className="flex gap-14 flex-col items-center  w-[50vh]">
         <div className="flex items-center flex-col">
-          <img src={logo} className="w-[10vh]" alt="logo" />
-          <h2 className="font-bold text-[28px]">Crear cuenta</h2>
+          <img src={logo} className="size-12" alt="logo" />
+          <h2 className="font-bold text-2xl font-semibold">Crear cuenta</h2>
         </div>
         <div className="flex  w-full flex-col gap-2">
           <label htmlFor="" className="">
