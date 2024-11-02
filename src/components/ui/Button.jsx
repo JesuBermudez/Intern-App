@@ -1,7 +1,11 @@
-/* eslint-disable react/prop-types */
+import React from "react";
+
 const Button = ({ params }) => {
   return (
-    <button onClick={params.onClick} className={params.styles}>
+    <button
+      onClick={params.onClick}
+      className="bg-transparent p-2 hover:bg-primary hover:text-accent rounded-full border border-primary text-primary w-full"
+    >
       {params.text}
     </button>
   );
