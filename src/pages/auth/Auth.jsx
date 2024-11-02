@@ -1,10 +1,11 @@
 import logo from "../../assets/logo.svg";
-import Button from "../../components/ui/Button";
-const Register = () => {
+import Button1 from "../../components/ui/Button1";
+const Auth = (type = "") => {
   const params = {
     text: "Continuar",
     onClick: () => console.log("click en registrar"),
   };
+
   return (
     <section className=" h-screen  flex flex-col justify-center items-center">
       <div className="flex gap-14 flex-col items-center  w-[50vh]">
@@ -22,15 +23,16 @@ const Register = () => {
             placeholder="Ingrese su nombre de usuario"
           ></input>
         </div>
-        <Button params={params}></Button>
-        <span className="text-center">Ya tiene una cuenta?
+        <Button1 params={params}></Button1>
+        <span className="text-center">
+          Ya tiene una cuenta?
           <br />
-          haz Click 
-          <a className="text-primary" > aqui</a>
+          haz Click
+          <a className="text-primary"> aqui</a>
         </span>
       </div>
     </section>
   );
 };
 
-export default Register;
+export default Auth;
