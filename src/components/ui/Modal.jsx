@@ -3,9 +3,10 @@ import messageIcon from "../../assets/messages.svg";
 import exitIcon from "../../assets/exit.svg";
 import useStore from "../../store/state";
 
-export default function Modal({ id, setOpenModal }) {
+export default function Modal({ setOpenModal }) {
   const openModal = useStore((state) => state.openModal);
   const user = useStore((state) => state.user);
+
   return (
     <section className="inset-0  backdrop-blur-[4px] fixed z-50 flex items-center justify-center">
       <div className="bg-accent rounded-lg p-6 border  border-secondary border-opacity-20">
@@ -20,7 +21,6 @@ export default function Modal({ id, setOpenModal }) {
             onClick={() => {
               openModal();
               setOpenModal(false);
-              console.log("diste click");
             }}
             className="group flex gap-2 p-2 cursor-pointer hover:bg-secondary/30 rounded-md"
           >
