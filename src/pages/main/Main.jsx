@@ -11,7 +11,7 @@ export default function Main() {
     <>
       <div className="bg-accent h-screen w-full py-8 flex flex-col items-center justify-between">
         {chats.length == 0 ? (
-          <section className=" flex flex-col items-center">
+          <section className=" flex flex-col items-center mt-16">
             <img src={logo} alt="Intern Logo" className="w-12 mx-auto mb-6" />
             <h2 className="text-white w-[13rem] text-center text-4xl font-semibold">
               Comienza a chatear
@@ -43,7 +43,11 @@ export default function Main() {
           </div>
         </section>
       </div>
-      {openModal === true ? <Modal id={"1919191"} setOpenModal={setOpenModal}></Modal> : ""}
+      {openModal === true ? (
+        <Modal id={"1919191"} setOpenModal={setOpenModal}></Modal>
+      ) : (
+        ""
+      )}
     </>
   );
 }
