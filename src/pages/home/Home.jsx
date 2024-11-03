@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="bg-accent w-full h-screen py-8 flex flex-col items-center justify-between">
       <section className="mt-10">
-        <img src={logo} alt="Intern Logo" className=":w-12 mx-auto mb-6" />
+        <img src={logo} alt="Intern Logo" className="w-12 mx-auto mb-6" />
         <h2 className="text-white w-[13rem] text-center text-3xl font-semibold">
           Privacidad en todo momento
         </h2>
