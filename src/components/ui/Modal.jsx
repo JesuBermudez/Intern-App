@@ -3,12 +3,15 @@ import messageIcon from "../../assets/messages.svg";
 import usersIcon from "../../assets/users.svg";
 import exitIcon from "../../assets/exit.svg";
 
-export default function Modal({ id }) {
+export default function Modal({ id, setOpenModal }) {
   return (
-    <section className="flex items-center justify-center flex-col h-screen bg-white bg-opacity-10">
-      <div className="bg-accent rounded-lg p-5">
-        <div className="flex flex-col gap-2 w-[21rem] lg:w-[28rem]">
-          <button className="flex justify-end">
+    <section className="inset-0  backdrop-blur-[1px] fixed  z-50 flex items-center justify-center flex-col bg-opacity-10">
+      <div className="bg-accent rounded-lg p-4 border  border-secondary border-opacity-20">
+        <div className="flex flex-col gap-2 w-[21rem] ">
+          <button
+            className="flex justify-end"
+            onClick={() => setOpenModal(false)}
+          >
             <img src={exitIcon} alt="Cerrar modal" />
           </button>
 
@@ -22,14 +25,14 @@ export default function Modal({ id }) {
             <button className="hover:text-primary">Crear grupo</button>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 ">
             <span className="font-bold">Id de cuenta</span>
-            <p>
+            <p className="flex w-rap">
               Comparte este código con tus amigos para iniciar una conversación
             </p>
           </div>
 
-          <QRCode className="w-full" size={300} value={id} />
+          <QRCode className="border mx-auto border-white border-opacity-50 rounded-lg" size={250} value={id} />
         </div>
       </div>
     </section>
