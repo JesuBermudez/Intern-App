@@ -1,7 +1,18 @@
 import closeIcon from "../../assets/exit.svg";
 import useStore from "../../store/state";
+import Button2 from "./Button2";
+
 export default function ModalChats() {
   const openModal = useStore((state) => state.openModal);
+  const buttonParams = {
+    onClick: () => {
+      console.log("Chat Iniciado");
+    },
+    text: "Iniciar Chat",
+  };
+
+  function handle(params) {}
+
   return (
     <section className="backdrop-blur-[4px] inset-0 z-50 fixed flex items-center justify-center ">
       <div className="flex flex-col bg-accent  w-[21rem] lg:w-[28rem] gap-5 border p-5 rounded-lg border-opacity-10">
@@ -28,6 +39,8 @@ export default function ModalChats() {
             placeholder="Ingrese el ID de la cuenta"
           />
         </div>
+
+        <Button2 params={buttonParams}></Button2>
       </div>
     </section>
   );
