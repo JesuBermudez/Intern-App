@@ -15,12 +15,18 @@ const Auth = ({ type }) => {
   const setUser = useStore((state) => state.setUser);
   const user = useStore((state) => state.user);
   const navigator = useNavigate();
+
   const handleLogin = async () => {
-    const ip =await getClientIp()
-    const res = await loginService({username:username,ip:ip, recoveryKey:inputText});
+    const ip = await getClientIp();
+    const res = await loginService({
+      username: username,
+      ip: ip,
+      recoveryKey: inputText,
+    });
     setUser(res.user);
     localStorage.setItem("userInfo", JSON.stringify(res.user));
     navigator("/main");
+    console.log("main");
   };
   const params = {
     onClick: () => {
@@ -28,8 +34,7 @@ const Auth = ({ type }) => {
     },
     text: "Continuar",
   };
-  useEffect(() => {
-  }, [showPopUp]);
+  useEffect(() => {}, [showPopUp]);
 
   const onConfirm = () => {
     setShowPopUp(false);
@@ -49,7 +54,7 @@ const Auth = ({ type }) => {
       if (response.user !== null) {
         console.log("usuario al regitro", response.user);
         setUser(response.user);
-        localStorage.setItem("userInfo", JSON.stringify(res.user));
+        localStorage.setItem("userInfo", JSON.stringify(response.user));
         navigator("/main");
       }
     } catch (error) {

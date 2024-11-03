@@ -12,14 +12,17 @@ export default async function registerService(user) {
 
     const res = await response.json();
 
-    if ("msg" in res) {
-      return { error: res.msg, user: null };
+    if (!res.msg.userId) {
+      return {
+        error: res.msg,
+      };
     }
+
     return {
-      user: res.message,
+      user: res.msg,
       msg: "usuario creado",
     };
   } catch (error) {
-    console.log("ERROR EN PETICION",error);
+    console.log("ERROR EN PETICION", error);
   }
 }
