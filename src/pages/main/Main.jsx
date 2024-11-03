@@ -2,10 +2,13 @@ import { useState } from "react";
 import logo from "../../assets/logo.svg";
 import plusSolid from "../../assets/plus-solid.svg";
 import Modal from "../../components/ui/Modal";
+import useStore from "../../store/state";
+import ModalChats from "../../components/ui/ModalChats";
 
 export default function Main() {
   const [chats, setChats] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const isOpenModal = useStore((state) => state.isOpenModal);
 
   return (
     <>
@@ -43,10 +46,14 @@ export default function Main() {
           </div>
         </section>
       </div>
-      {openModal === true ? (
+      {openModal === true? (
         <Modal id={"1919191"} setOpenModal={setOpenModal}></Modal>
       ) : (
-        ""
+        <>
+        
+        {isOpenModal ? <ModalChats/>: ""}
+        
+        </>
       )}
     </>
   );

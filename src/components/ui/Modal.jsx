@@ -2,8 +2,9 @@ import QRCode from "react-qr-code";
 import messageIcon from "../../assets/messages.svg";
 import usersIcon from "../../assets/users.svg";
 import exitIcon from "../../assets/exit.svg";
-
+import useStore from "../../store/state";
 export default function Modal({ id, setOpenModal }) {
+  const openModal = useStore((state) => state.openModal);
   return (
     <div className="bg-white">
       <section className="inset-0  backdrop-blur-[4px] fixed  z-50 flex items-center justify-center flex-col bg-opacity-10">
@@ -18,6 +19,8 @@ export default function Modal({ id, setOpenModal }) {
             {}
             <div
               onClick={() => {
+                openModal();
+                setOpenModal(false)
                 console.log("diste click");
               }}
               className="group flex gap-2 p-2 cursor-pointer hover:bg-secondary/30 rounded-md"
