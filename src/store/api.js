@@ -1,1 +1,1 @@
-export const apiUrl = "https://fvrwjtd0-3000.use2.devtunnels.ms/api/v1";
+export const apiUrl = "http://192.168.10.39:3000/api/v1";

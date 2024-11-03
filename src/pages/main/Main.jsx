@@ -13,7 +13,6 @@ export default function Main() {
   const [chats, setChats] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalKey, setOpenModalKey] = useState(false);
-  const [isConected, setIsConected] = useState(false);
   const isOpenModal = useStore((state) => state.isOpenModal);
 
   const setUser = useStore((state) => state.setUser);
