@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Auth from "../pages/auth/Auth";
+import Modal from "../components/ui/Modal";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
