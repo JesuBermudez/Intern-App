@@ -15,12 +15,11 @@ export default async function registerService(user) {
     if ("msg" in res) {
       return { error: res.msg, user: null };
     }
-
     return {
       user: res.message,
       msg: "usuario creado",
     };
   } catch (error) {
-    console.log(error);
+    console.log("ERROR EN PETICION",error);
   }
 }

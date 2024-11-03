@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../../assets/logo.svg";
 import plusSolid from "../../assets/plus-solid.svg";
 import Modal from "../../components/ui/Modal";
@@ -6,14 +6,28 @@ import useStore from "../../store/state";
 import ModalChats from "../../components/ui/ModalChats";
 import { socket } from "../../store/socket";
 import ModalKey from "../../components/ui/ModalKey";
+import { json } from "react-router-dom";
 
 export default function Main() {
   const [chats, setChats] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalKey, setOpenModalKey] = useState(false);
   const isOpenModal = useStore((state) => state.isOpenModal);
+  const [userinfo, setUserInfo] = useState(null);
+  const setUser = useStore((state) => state.setUser);
   const user = useStore((state) => state.user);
-  console.log("USRUAI", user);
+  useEffect(() => {
+    const userStorage = localStorage.getItem("userInfo");
+    if (userStorage) {
+      const info = JSON.parse(userStorage);
+      
+      setUserInfo(info);
+      setUser(info);
+    }
+  }, []);
+  if (!userinfo) {
+    return;
+  }
   return (
     <>
       <div className="bg-accent h-screen w-full py-8 flex flex-col items-center justify-between">
@@ -44,11 +58,11 @@ export default function Main() {
           <div className="flex flex-col justify-center">
             <p className="text-lg">
               <span className="font-semibold">Nombre de usuario: </span>
-              {user.username}
+              {userinfo.username}
             </p>
             <div className="flex">
               <p className="text-lg font-semibold mr-1">ID:</p>
-              <p className="text-lg">{user.userId}</p>
+              <p className="text-lg">{userinfo.userId}</p>
             </div>
             <div>
               <span

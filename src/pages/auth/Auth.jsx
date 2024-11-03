@@ -1,28 +1,34 @@
 import { useEffect, useState } from "react";
 import logo from "../../assets/logo.svg";
 import Button1 from "../../components/ui/Button1";
-import registerService from "../../services/register";
 import { getClientIp } from "../../services/ip";
 import IpPopUp from "../../components/ui/IpPopUp";
 import useStore from "../../store/state";
 import { useNavigate } from "react-router-dom";
+import registerService from "../../services/register";
+import loginService from "../../services/login";
 const Auth = ({ type }) => {
   const [inputText, setInputText] = useState("");
+  const [username, setUsername] = useState("");
   const [confirmIp, setConfirmIp] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
   const setUser = useStore((state) => state.setUser);
   const user = useStore((state) => state.user);
   const navigator = useNavigate();
+  const handleLogin = async () => {
+    const ip =await getClientIp()
+    const res = await loginService({username:username,ip:ip, recoveryKey:inputText});
+    setUser(res.user);
+    localStorage.setItem("userInfo", JSON.stringify(res.user));
+    navigator("/main");
+  };
   const params = {
     onClick: () => {
-      type == "register" ? setShowPopUp(true) : false;
+      type == "register" ? setShowPopUp(true) : handleLogin();
     },
     text: "Continuar",
   };
-
   useEffect(() => {
-    console.log(type, showPopUp);
-    console.log("user", user);
   }, [showPopUp]);
 
   const onConfirm = () => {
@@ -40,11 +46,10 @@ const Auth = ({ type }) => {
     try {
       const ip = await getClientIp();
       const response = await registerService({ username: inputText, ip: ip });
-
-      if (response.error) alert(`ocurrio un error ${response.error}`);
       if (response.user !== null) {
-        console.log(response.user);
+        console.log("usuario al regitro", response.user);
         setUser(response.user);
+        localStorage.setItem("userInfo", JSON.stringify(res.user));
         navigator("/main");
       }
     } catch (error) {
@@ -64,6 +69,22 @@ const Auth = ({ type }) => {
             </h2>
           </div>
           <div className="flex  w-full flex-col gap-2">
+            {type === "login" ? (
+              <div className="flex  w-full flex-col gap-2">
+                <label htmlFor="">Username</label>
+                <input
+                  className="border w-[21rem] lg:w-[28rem] border-secondary p-2 rounded-lg bg-transparent outline-none"
+                  type="text"
+                  placeholder="Ingrese su nombre de usuario"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                ></input>
+              </div>
+            ) : (
+              ""
+            )}
             <label htmlFor="" className="">
               {type === "login" ? "Clave de cuenta" : "Nombre de usuario"}
             </label>
@@ -85,6 +106,7 @@ const Auth = ({ type }) => {
               }}
             ></input>
           </div>
+
           <Button1 params={params}></Button1>
           <span className="text-center">
             {type === "login"

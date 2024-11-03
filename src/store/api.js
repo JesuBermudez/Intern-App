@@ -1,1 +1,1 @@
-export const apiUrl = "https://enter-app.onrender.com/api/v1";
+export const apiUrl = "https://fvrwjtd0-3000.use2.devtunnels.ms/api/v1";

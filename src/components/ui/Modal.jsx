@@ -5,7 +5,7 @@ import useStore from "../../store/state";
 
 export default function Modal({ id, setOpenModal }) {
   const openModal = useStore((state) => state.openModal);
-
+  const user = useStore((state) => state.user);
   return (
     <section className="inset-0  backdrop-blur-[4px] fixed z-50 flex items-center justify-center">
       <div className="bg-accent rounded-lg p-6 border  border-secondary border-opacity-20">
@@ -40,10 +40,10 @@ export default function Modal({ id, setOpenModal }) {
           <QRCode
             className="border-8 border-white mx-auto mt-6 rounded-lg"
             size={250}
-            value={id}
+            value={user.userId}
           />
 
-          <p className="m-auto mt-3 font-medium">ID: 8245382jkfas</p>
+          <p className="m-auto mt-3 font-medium">ID: {user.userId}</p>
         </div>
       </div>
     </section>

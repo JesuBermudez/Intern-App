@@ -2,8 +2,20 @@ import logo from "../../assets/logo.svg";
 import HomeIcons from "../../assets/HomeIcons.svg";
 import Button1 from "../../components/ui/Button1";
 import Button2 from "../../components/ui/Button2";
+import useStore from "../../store/state";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const setUser = useStore((state) => state.setUser);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userStorage = localStorage.getItem("userInfo");
+    if (userStorage) {
+      setUser(JSON.parse(userStorage));
+      navigate("/main");
+    }
+  }, []);
   const buttonParams1 = {
     onClick: () => {
       window.location.href = "/login";
