@@ -33,18 +33,18 @@ export default function Main() {
       console.log("Conectado al servidor");
     });
 
-    socket.on("message", (data) => {
-      console.log("Mensaje recibido:", data);
-    });
-
-    socket.on("contact Added", (contact) => {
-      setContact((prevItems) => [...prevItems, contact]);
+    socket.on("contact Added", (newContact) => {
+      console.log(contact, newContact);
+      if (contact.length != 0) {
+        setContact((prevItems) => [...prevItems, newContact]);
+      } else {
+        setContact(newContact);
+      }
       closeModal();
     });
 
     return () => {
       socket.off("connect");
-      socket.off("message");
       socket.off("contact Added");
     };
   }, []);
