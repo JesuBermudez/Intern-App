@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useStore from "../../store/state";
 import sendAlt from "../../assets/send-alt.svg";
 import arrowSmLeft from "../../assets/arrow-sm-left.svg";
@@ -15,6 +15,13 @@ export default function Chat() {
   const [messagePending, setMessagePending] = useState([]);
   const chat = useStore((state) => state.chat);
   const user = useStore((state) => state.user);
+  const divRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (divRef.current) {
+      divRef.current.scrollTop = divRef.current.scrollHeight;
+    }
+  };
 
   useEffect(() => {
     getMessage();
@@ -28,6 +35,7 @@ export default function Chat() {
       } else {
         setMessages((prevItems) => [...prevItems, message]);
         console.log("newmessage");
+        scrollToBottom();
       }
     });
 
@@ -87,7 +95,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="w-screen h-screen grid grid-rows-[auto,1fr,auto]">
+    <div className="w-full h-screen grid grid-rows-[10%,80%,10%]">
       <header className="border-b p-2 flex items-center justify-center">
         <div
           className="group p-1 size-14 mr-10 rounded-xl cursor-pointer"
@@ -111,8 +119,11 @@ export default function Chat() {
         </section>
       </header>
       <section className="relative">
-        <div className="chat-content absolute top-0 w-full h-full opacity-15"></div>
-        <div className="md:w-1/2 w-full sm:w-4/6 p-2 h-full mx-auto overflow-y-scroll scrollbar-hide">
+        <div className="chat-content absolute top-0 w-full h-full opacity-15 -z-10"></div>
+        <div
+          className="md:w-1/2 w-full sm:w-4/6 p-2 h-full mx-auto overflow-y-scroll scrollbar-hide"
+          ref={divRef}
+        >
           {messages.map((message, i) => (
             <article
               key={message.datetime + i}
