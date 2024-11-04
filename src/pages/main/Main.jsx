@@ -26,6 +26,8 @@ export default function Main() {
 
     getContacts();
 
+    socket.emit("register", user.userId);
+
     socket.on("connect", () => {
       console.log("Conectado al servidor");
     });
@@ -102,7 +104,6 @@ export default function Main() {
                 localStorage.clear();
                 setUser(null);
                 window.location = "/";
-
               }}
             >
               Cerrar sesion

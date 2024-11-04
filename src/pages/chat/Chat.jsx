@@ -153,6 +153,7 @@ export default function Chat() {
       </section>
       <footer className="border-t p-3 flex justify-center gap-3 items-center">
         <input
+          autoFocus
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
