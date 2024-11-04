@@ -18,6 +18,7 @@ export default function Main() {
   const closeModal = useStore((state) => state.closeModal);
   const user = useStore((state) => state.user);
   const setUser = useStore((state) => state.setUser);
+
   useEffect(() => {
     if (!user) {
       window.location = "/";
@@ -51,7 +52,7 @@ export default function Main() {
   async function getContacts() {
     const response = await getContactService(user.userId);
 
-    if (response.error) {
+    if (response?.error) {
       alert(`Error: ${response.error}`);
     }
 
@@ -78,7 +79,7 @@ export default function Main() {
               <img src={plusSolid} alt="Agregar chat" className="size-8" />
             </button>
           </section>
-          {contact.length != 0 && <ContactList contacts={contact} />}
+          <ContactList contacts={contact} />
           <section className="lg:flex lg:p-0 p-4 items-center justify-center gap-2 ">
             <div
               className="size-14 flex items-center justify-center rounded-full border-2 border-primary p-1 overflow-hidden mr-4 cursor-pointer"
