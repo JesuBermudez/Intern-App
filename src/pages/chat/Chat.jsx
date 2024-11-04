@@ -20,6 +20,7 @@ export default function Chat() {
     getMessage();
 
     socket.on("newMessage", (message) => {
+      console.log(message);
       const updatedItems = messagePending.filter((m) => m !== message);
       if (updatedItems != messagePending) {
         setMessagePending(updatedItems);
