@@ -9,11 +9,11 @@ export default async function getMessageService(chat) {
     const res = await response.json();
     console.log(res);
 
-    if (!Array.isArray(res)) {
+    if (!Array.isArray(res.msg)) {
       return { error: res.msg };
     }
 
-    return res;
+    return res.msg;
   } catch (error) {
     console.log(error);
   }
