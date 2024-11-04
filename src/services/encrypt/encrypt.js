@@ -1,48 +1,60 @@
-import NodeRSA from "node-rsa";
-import crypto from "node:crypto";
-export const generateRsaKeyPair = () => {
-  const key = new NodeRSA({ b: 2048 }); 
+export const encrypt = (text) => {
+  if (!text) return null
 
-  const publicKey = key.exportKey("public");
-  const privateKey = key.exportKey("private");
+  let encryption = ''
+  const scrolling = 30
 
-  return { publicKey, privateKey };
-};
+  for (let index = 0; index < text.length; index++) {
+      let char = text[index]
+      let code = text.charCodeAt(index)
 
-export const encryptMessage = (message, recipientPublicKey) => {
-  const aesKey = crypto.randomBytes(32);
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv("aes-256-gcm", aesKey, iv);
-  let encryptedMessage = cipher.update(message, "utf-8", "hex");
-  encryptedMessage += cipher.final("hex");
-  const authTag = cipher.getAuthTag().toString("hex");
-  const rsaKey = new NodeRSA(recipientPublicKey);
-  const encryptedAesKey = rsaKey.encrypt(aesKey, "base64");
-  return {
-    encryptedAesKey,
-    iv: iv.toString("hex"),
-    authTag,
-    encryptedMessage,
-  };
-};
+      if (
+          (code >= 65 && code <= 90) ||
+          (code >= 97 && code <= 122) ||
+          (code >= 48 && code <= 57)
+      ) {
+          code = code + (scrolling % 26)
 
-export const decryptMessage = (encryptedData, recipientPrivateKey) => {
-  const { encryptedAesKey, iv, authTag, encryptedMessage } = encryptedData;
-  const rsaKey = new NodeRSA(recipientPrivateKey);
-  const aesKey = rsaKey.decrypt(encryptedAesKey, "buffer");
-  console.log("AES Key length:", aesKey.length);
-  if (aesKey.length !== 32) {
-    throw new Error(
-      "Decrypted AES key does not have the correct length of 32 bytes"
-    );
+          if ((code > 90 && code < 97) || code > 122) {
+              code -= 26
+          }
+
+          char = String.fromCharCode(code)
+      }
+
+      encryption += char
   }
-  const decipher = crypto.createDecipheriv(
-    "aes-256-gcm",
-    aesKey,
-    Buffer.from(iv, "hex")
-  );
-  decipher.setAuthTag(Buffer.from(authTag, "hex"));
-  let decryptedMessage = decipher.update(encryptedMessage, "hex", "utf-8");
-  decryptedMessage += decipher.final("utf-8");
-  return decryptedMessage;
-};
+
+  return encryption
+}
+export const decrypt = (encryptText) => {
+  if (!encryptText) return null
+
+  let text = ''
+
+  let scrolling = 30
+
+  for (let index = 0; index < encryptText.length; index++) {
+      let char = encryptText[index]
+      let code = encryptText.charCodeAt(index)
+
+      if (
+          (code >= 65 && code <= 90) ||
+          (code >= 97 && code <= 122) ||
+          (code >= 48 && code <= 57)
+      ) {
+          code = code - (scrolling % 26)
+
+          if (code < 65 || (code > 90 && code < 97)) {
+              code += 26
+          }
+
+          char = String.fromCharCode(code)
+      }
+
+      text += char
+  }
+
+  return text
+}
+
