@@ -10,6 +10,8 @@ export default function ContactList({ contacts = [] }) {
     navigate("/chat");
   }
 
+  console.log(contacts);
+
   return (
     <section className="h-1/2 w-full lg:w-1/3 p-2 overflow-y-scroll scrollbar-hide mb-5">
       {contacts.length != 0 &&

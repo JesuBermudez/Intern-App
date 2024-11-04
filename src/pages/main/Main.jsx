@@ -8,8 +8,10 @@ import ModalKey from "../../components/ui/ModalKey";
 import socket from "../../store/socket";
 import getContactService from "../../services/getContacts";
 import ContactList from "../../components/contacts/ContactList";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
+  const navigate = useNavigate();
   const [contact, setContact] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalKey, setOpenModalKey] = useState(false);
@@ -21,7 +23,7 @@ export default function Main() {
 
   useEffect(() => {
     if (!user) {
-      window.location = "/";
+      navigate("/");
       return;
     }
 
@@ -38,7 +40,7 @@ export default function Main() {
       if (contact.length != 0) {
         setContact((prevItems) => [...prevItems, newContact]);
       } else {
-        setContact(newContact);
+        setContact([newContact]);
       }
       closeModal();
     });
