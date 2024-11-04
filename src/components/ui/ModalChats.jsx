@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import closeIcon from "../../assets/exit.svg";
 import useStore from "../../store/state";
 import Button2 from "./Button2";
