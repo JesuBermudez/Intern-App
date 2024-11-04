@@ -19,17 +19,16 @@ export default function Chat() {
   useEffect(() => {
     getMessage();
 
-    socket.on("chat message", (message) => {
-      const updatedItems = messagePending.filter((m) => m !== message);
-      setMessagePending(updatedItems);
-    });
-
     socket.on("newMessage", (message) => {
-      setMessages((prevItems) => [...prevItems, message]);
+      const updatedItems = messagePending.filter((m) => m !== message);
+      if (updatedItems != messagePending) {
+        setMessagePending(updatedItems);
+      } else {
+        setMessages((prevItems) => [...prevItems, message]);
+      }
     });
 
     return () => {
-      socket.off("chat message");
       socket.off("newMessage");
     };
   }, []);
@@ -44,9 +43,8 @@ export default function Chat() {
         alert(
           "No fue posible cargar los mensajes, recarga la pagina por favor."
         );
+        navigate("/main");
       }
-
-      console.log(response);
 
       setMessages(response);
     } catch (error) {
