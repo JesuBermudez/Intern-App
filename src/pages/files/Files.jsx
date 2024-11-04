@@ -13,6 +13,8 @@ export default function FilePages() {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
   const [files, setFile] = useState([]);
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -22,7 +24,6 @@ export default function FilePages() {
   };
   useEffect(() => {
     async function getFile() {
-      const user = JSON.parse(localStorage.getItem("userInfo"));
       const res = await getFilesByUser(user.userId);
       console.log("RES FILES", res);
 
@@ -34,8 +35,13 @@ export default function FilePages() {
   const handleUpload = async () => {
     if (selectedFile) {
       try {
-        const result = await uploadFile(selectedFile);
-        setUploadStatus(`Archivo "${fileName}" subido exitosamente: ${result}`);
+        const result = await uploadFile(selectedFile, user.userId);
+        console.log(result);
+        setUploadStatus(
+          `Archivo "${fileName}" subido exitosamente: ${result.name}`
+        );
+        setFile((prevItem) => [...prevItem, result]);
+        console.log(files);
       } catch (error) {
         setUploadStatus(`Error: ${error.message}`);
       }

@@ -36,12 +36,7 @@ export default function Main() {
     });
 
     socket.on("contact Added", (newContact) => {
-      console.log(contact, newContact);
-      if (contact.length != 0) {
-        setContact((prevItems) => [...prevItems, newContact]);
-      } else {
-        setContact([newContact]);
-      }
+      setNewContact(newContact);
       closeModal();
     });
 
@@ -50,6 +45,15 @@ export default function Main() {
       socket.off("contact Added");
     };
   }, []);
+
+  function setNewContact(newContact) {
+    console.log(contact, newContact);
+    if (contact.length != 0) {
+      setContact((prevItems) => [...prevItems, newContact]);
+    } else {
+      setContact([newContact]);
+    }
+  }
 
   async function getContacts() {
     const response = await getContactService(user.userId);
@@ -63,6 +67,7 @@ export default function Main() {
 
   function onAdd(cui) {
     socket.emit("add", { userId: user.userId, contactUserId: cui });
+    console.log(contact);
   }
 
   return (

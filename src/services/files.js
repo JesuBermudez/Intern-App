@@ -1,23 +1,24 @@
 import { apiUrl } from "../store/api";
 
-export const uploadFile = async (file) => {
+export const uploadFile = async (file, userId) => {
   const formData = new FormData();
   formData.append("files", file);
   try {
-    const response = await fetch(`${apiUrl}/encrypt-file`, {
+    const response = await fetch(`${apiUrl}/encrypt-file/${userId}`, {
       method: "POST",
       body: formData,
     });
-    console.log("filess", await response.json());
+    const res = await response.json();
 
-    return await response.json();
+    return res;
   } catch (error) {
     throw new Error(error.message || "Error al subir el archivo");
   }
 };
-export const getFilesByUser = async (filename) => {
+
+export const getFilesByUser = async (userId) => {
   try {
-    const response = await fetch(`${apiUrl}/get-files/${filename}`, {
+    const response = await fetch(`${apiUrl}/get-files/${userId}`, {
       method: "GET",
     });
 
