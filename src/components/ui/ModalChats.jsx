@@ -1,17 +1,15 @@
+import { useEffect, useState } from "react";
 import closeIcon from "../../assets/exit.svg";
 import useStore from "../../store/state";
 import Button2 from "./Button2";
 
-export default function ModalChats() {
+export default function ModalChats({ onAdd }) {
+  const [input, setInput] = useState("");
   const openModal = useStore((state) => state.openModal);
   const buttonParams = {
-    onClick: () => {
-      console.log("Chat Iniciado");
-    },
+    onClick: () => input != "" && onAdd(input),
     text: "Iniciar Chat",
   };
-
-  function handle(params) {}
 
   return (
     <section className="backdrop-blur-[4px] inset-0 z-50 fixed flex items-center justify-center ">
@@ -37,6 +35,8 @@ export default function ModalChats() {
             className="p-2 rounded-lg outline-none border border-secondary bg-transparent"
             type="text"
             placeholder="Ingrese el ID de la cuenta"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
         </div>
 
