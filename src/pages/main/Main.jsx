@@ -42,6 +42,7 @@ export default function Main() {
     return () => {
       socket.off("connect");
       socket.off("message");
+      socket.off("contact Added");
     };
   }, []);
 
@@ -72,23 +73,18 @@ export default function Main() {
               className="p-2 rounded-full bg-primary mt-12"
               onClick={() => setOpenModal(!openModal)}
             >
-
               <img src={plusSolid} alt="Agregar chat" className="size-8" />
             </button>
           </section>
           {contact.length != 0 && <ContactList contacts={contact} />}
           <section className="lg:flex lg:p-0 p-4 items-center justify-center gap-2 ">
             <div
-              className="size-14 flex items-center justify-center rounded-full border-2 border-primary p-1 overflow-hidden mr-6 cursor-pointer"
+              className="size-14 flex items-center justify-center rounded-full border-2 border-primary p-1 overflow-hidden mr-4 cursor-pointer"
               onClick={() => setOpenModalKey(!openModalKey)}
             >
-              {/* <img
-                src="https://github.com/leowader.png"
-                alt=""
-                className="rounded-full"
-              /> */}
-              <span>{(user.username.slice(0, 2)).toUpperCase()}</span>
-
+              <span className="font-medium">
+                {user.username.slice(0, 2).toUpperCase()}
+              </span>
             </div>
             <div className="flex flex-col justify-center">
               <p className="text-lg">
