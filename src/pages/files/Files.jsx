@@ -37,9 +37,7 @@ export default function FilePages() {
       try {
         const result = await uploadFile(selectedFile, user.userId);
         console.log(result);
-        setUploadStatus(
-          `Archivo "${fileName}" subido exitosamente: ${result.name}`
-        );
+        setUploadStatus(`Archivo "${fileName}" subido exitosamente.`);
         setFile((prevItem) => [...prevItem, result]);
         console.log(files);
       } catch (error) {
