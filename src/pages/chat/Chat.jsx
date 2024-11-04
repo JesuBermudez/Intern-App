@@ -108,7 +108,10 @@ export default function Chat() {
           />
         </div>
         <section className="flex p-2 mr-6 items-center justify-center gap-2">
-          <div className="size-14 flex items-center justify-center rounded-full border-2 border-primary p-1 overflow-hidden mr-4 cursor-pointer">
+          <div
+            className="size-14 flex items-center justify-center rounded-full border-2 border-primary p-1 overflow-hidden mr-4 cursor-pointer"
+            onClick={() => navigate("/files")}
+          >
             <span className="font-medium">
               {chat.username.slice(0, 2).toUpperCase()}
             </span>
