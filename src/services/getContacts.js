@@ -12,7 +12,7 @@ export default async function getContactService(userId) {
       return { error: res.msg };
     }
 
-    return res.chats;
+    return res.chats.msg;
   } catch (error) {
     console.log(error);
   }
