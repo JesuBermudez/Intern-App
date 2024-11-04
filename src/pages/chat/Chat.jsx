@@ -22,10 +22,12 @@ export default function Chat() {
     socket.on("newMessage", (message) => {
       console.log(message);
       const updatedItems = messagePending.filter((m) => m !== message);
-      if (updatedItems != messagePending) {
+      if (message.idUserSend == user.userId) {
         setMessagePending(updatedItems);
+        console.log("pendiente", updatedItems, messagePending);
       } else {
         setMessages((prevItems) => [...prevItems, message]);
+        console.log("newmessage");
       }
     });
 
@@ -62,7 +64,7 @@ export default function Chat() {
       idUserSend: user.userId,
       idUserReceiver: chat.contact_user_id,
       message: input,
-      date: getDateChat(),
+      datetime: getDateChat(),
     });
 
     const messagePending = {
