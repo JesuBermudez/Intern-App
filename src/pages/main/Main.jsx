@@ -17,7 +17,7 @@ export default function Main() {
   const isOpenModal = useStore((state) => state.isOpenModal);
   const closeModal = useStore((state) => state.closeModal);
   const user = useStore((state) => state.user);
-
+  const setUser = useStore((state) => state.setUser);
   useEffect(() => {
     if (!user) {
       window.location = "/";
@@ -96,6 +96,17 @@ export default function Main() {
                 <p className="text-lg">{user.userId}</p>
               </div>
             </div>
+            <span
+              className="hover:text-primary cursor-pointer"
+              onClick={() => {
+                localStorage.clear();
+                setUser(null);
+                window.location = "/";
+
+              }}
+            >
+              Cerrar sesion
+            </span>
           </section>
         </div>
         {openModal === true ? (

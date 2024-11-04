@@ -1,7 +1,10 @@
+import { data } from "autoprefixer";
 import { apiUrl } from "../store/api";
 
 export default async function registerService(user) {
   try {
+    console.log("DATA",user);
+    
     const response = await fetch(`${apiUrl}/users`, {
       method: "POST",
       headers: {
@@ -11,12 +14,15 @@ export default async function registerService(user) {
     });
 
     const res = await response.json();
+    console.log("REESSS",res);
+    
 
     if (!res.msg.userId) {
       return {
         error: res.msg,
       };
     }
+    
 
     return {
       user: res.msg,

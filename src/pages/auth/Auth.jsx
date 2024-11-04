@@ -51,6 +51,8 @@ const Auth = ({ type }) => {
     try {
       const ip = await getClientIp();
       const response = await registerService({ username: inputText, ip: ip });
+      console.log("RESPONSE",response);
+      
       if (response.user !== null) {
         console.log("usuario al regitro", response.user);
         setUser(response.user);
