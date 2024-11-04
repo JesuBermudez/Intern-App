@@ -20,13 +20,17 @@ export default function Chat() {
     getMessage();
 
     socket.on("chat message", (message) => {
-      console.log(message);
       const updatedItems = messagePending.filter((m) => m !== message);
       setMessagePending(updatedItems);
     });
 
+    socket.on("newMessage", (message) => {
+      setMessages((prevItems) => [...prevItems, message]);
+    });
+
     return () => {
       socket.off("chat message");
+      socket.off("newMessage");
     };
   }, []);
 
