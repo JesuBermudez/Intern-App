@@ -2,17 +2,21 @@ import { useState } from "react";
 import Button2 from "./Button2";
 import closeIcon from "../../assets/exit.svg";
 import { apiUrl } from "../../store/api";
-
+import useStore from "../../store/state";
 export function ModalFile({ closeModal, filename }) {
   const [publicKey, setPublicKey] = useState("");
-
+  const user = useStore((state) => state.user);
   const params = {
     onClick: () => {
       if (publicKey.trim() === "") {
         alert("Por favor, ingrese la clave pública.");
         return;
       }
-      window.open(`${apiUrl}/decrypt-file/${filename}.enc`, "_blank");
+      if (user.recoveryKey === publicKey) {
+        window.open(`${apiUrl}/decrypt-file/${filename}.enc`, "_blank");
+      }else{
+        alert("Clave publica incorrecta")
+      }
     },
     text: "Desencriptar",
   };

@@ -14,7 +14,6 @@ export default async function registerService(user) {
     });
 
     const res = await response.json();
-    console.log("REESSS",res);
     
 
     if (!res.msg.userId) {

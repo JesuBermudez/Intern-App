@@ -6,7 +6,6 @@ export default async function getContactService(userId) {
       method: "GET",
     });
     const res = await response.json();
-    console.log(res);
 
     if (res.msg) {
       return { error: res.msg };

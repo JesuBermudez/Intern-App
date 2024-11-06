@@ -17,7 +17,6 @@ export default async function loginService(user) {
     );
 
     const res = await response.json();
-    console.log("res", res);
 
     return {
       user: res.msg,

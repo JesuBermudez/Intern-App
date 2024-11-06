@@ -25,8 +25,6 @@ export default function FilePages() {
   useEffect(() => {
     async function getFile() {
       const res = await getFilesByUser(user.userId);
-      console.log("RES FILES", res);
-
       setFile(res);
     }
     getFile();
@@ -36,10 +34,8 @@ export default function FilePages() {
     if (selectedFile) {
       try {
         const result = await uploadFile(selectedFile, user.userId);
-        console.log(result);
         setUploadStatus(`Archivo "${fileName}" subido exitosamente.`);
         setFile((prevItem) => [...prevItem, result]);
-        console.log(files);
       } catch (error) {
         setUploadStatus(`Error: ${error.message}`);
       }

@@ -31,7 +31,6 @@ export default function Chat() {
       const updatedItems = messagePending.filter((m) => m !== message);
       if (message.idUserSend == user.userId) {
         setMessagePending(updatedItems);
-        console.log("pendiente", updatedItems, messagePending);
       } else {
         setMessages((prevItems) => [...prevItems, message]);
         console.log("newmessage");

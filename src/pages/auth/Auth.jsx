@@ -26,7 +26,6 @@ const Auth = ({ type }) => {
     setUser(res.user);
     localStorage.setItem("userInfo", JSON.stringify(res.user));
     navigator("/main");
-    console.log("main");
   };
   const params = {
     onClick: () => {
@@ -51,10 +50,8 @@ const Auth = ({ type }) => {
     try {
       const ip = await getClientIp();
       const response = await registerService({ username: inputText, ip: ip });
-      console.log("RESPONSE",response);
       
       if (response.user !== null) {
-        console.log("usuario al regitro", response.user);
         setUser(response.user);
         localStorage.setItem("userInfo", JSON.stringify(response.user));
         navigator("/main");

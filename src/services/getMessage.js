@@ -7,7 +7,6 @@ export default async function getMessageService(chat) {
     });
 
     const res = await response.json();
-    console.log(res);
 
     if (!Array.isArray(res.msg)) {
       return { error: res.msg };

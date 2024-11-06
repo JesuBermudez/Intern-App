@@ -1,1 +1,1 @@
-export const apiUrl = "http://192.168.10.39:3000/api/v1";
+export const apiUrl = "https://enter-app.onrender.com/api/v1";
